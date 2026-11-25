@@ -1,8 +1,8 @@
 """Audit one page from its HTML, with no network access.
 
-This is the entry point for anything that already has the markup in hand:
-a CMS preview, a pull request check, or the in-browser demo, which runs this
-same function through Pyodide.
+This is the entry point for anything that already has the markup in hand,
+such as a CMS preview or a pull request check. To audit a live address, see
+``webaudit.live.audit_url``.
 """
 
 from __future__ import annotations
@@ -41,13 +41,18 @@ def audit_html(html: str, url: str | None = None, grade_target: float = 8.0) -> 
         not_run.append("CANONICAL_MISMATCH")
     issues = sort_issues(issues)
 
+    return build_result(page, issues, not_run, page_url if known_url else "")
+
+
+def build_result(page, issues, not_run, url: str) -> dict:
+    """Shape one page's audit as plain data. Shared by the HTML and URL audits."""
     counts = {s: 0 for s in SEVERITIES}
     for issue in issues:
         counts[issue.check.severity] += 1
 
     r = page.readability
     return {
-        "url": page_url if known_url else "",
+        "url": url,
         "counts": counts,
         "checks_run": len(CHECKS) - len(not_run),
         "issues": [
