@@ -2,6 +2,8 @@
 
 A command line tool that audits a website from its XML sitemap and returns a prioritized fix list. It runs 29 checks across indexation, metadata, accessibility, plain language, structured data, and internal links, then writes an HTML report, two CSV files, and a SQLite database you can query.
 
+**[Try the live demo](https://callanspyfer.github.io/website-governance-audit/)**: paste a page's HTML and the audit runs in your browser.
+
 ![Summary section of the HTML report](docs/report-summary.png)
 
 See the full sample: [report.md](examples/demo-report/report.md) (renders on GitHub), plus [issues.csv](examples/demo-report/issues.csv) and [pages.csv](examples/demo-report/pages.csv).
@@ -63,6 +65,20 @@ webaudit --sitemap https://www.example.org/sitemap.xml --out audit-report
 | `--fail-on SEVERITY` | Exit with status 1 if issues at that severity or worse exist, so the audit can gate a deploy in CI |
 
 Against a live site the tool obeys robots.txt, sends a user agent that identifies itself, and waits between requests.
+
+## Can I audit a single page?
+
+Yes. `audit_html` runs every page-level check on one HTML document with no network access. The [live demo](https://callanspyfer.github.io/website-governance-audit/) calls this same function in the browser through Pyodide.
+
+```python
+from webaudit.single import audit_html
+
+result = audit_html(open("page.html").read(), url="https://www.example.org/page/")
+for issue in result["issues"]:
+    print(issue["severity"], issue["title"], issue["detail"])
+```
+
+Checks that need a whole site, such as duplicate titles, broken links, and orphan pages, are listed in `result["not_run"]`.
 
 ## What do I get back?
 
@@ -139,11 +155,13 @@ src/webaudit/
   readability.py   Flesch-Kincaid grade
   checks.py        the check registry and the rules
   audit.py         orchestration
+  single.py        audit one page from its HTML, no network
   report.py        CSV, SQLite, Markdown, HTML
   cli.py           command line
 queries/           SQL for audit.sqlite
 examples/          demo site (fictional credit union) and its report
-tests/             58 tests
+docs/              the live demo page (GitHub Pages)
+tests/             66 tests
 ```
 
 ## Tests
@@ -153,7 +171,7 @@ pip install -e ".[dev]"
 pytest
 ```
 
-The suite covers the syllable rules against known words, the grade formula against a hand calculation, every page-level check firing alone, the full demo site run, live-site behavior (sitemap index, redirects, robots.txt) against a localhost server, and every SQL query.
+The suite covers the syllable rules against known words, the grade formula against a hand calculation, every page-level check firing alone, the full demo site run, live-site behavior (sitemap index, redirects, robots.txt) against a localhost server, the single-page audit, and every SQL query.
 
 ## About
 
