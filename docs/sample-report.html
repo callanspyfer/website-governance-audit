@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Website governance audit: www.maplewood-demo-cu.test</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1b2330;--muted:#5b6676;--line:#dfe3ea;
+--critical:#b3261e;--high:#b45309;--medium:#1d5fa8;--low:#4b5563;--ok:#1f7a4d}
+@media (prefers-color-scheme:dark){:root{--bg:#12161d;--card:#1a2029;--ink:#e8ecf2;--muted:#9aa5b5;
+--line:#2c3441;--critical:#ff8a80;--high:#f5b560;--medium:#7fb5f0;--low:#aab3c0;--ok:#6fcf97}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1040px;margin:0 auto;padding:40px 20px 72px}
+a{color:var(--medium)}
+h1{font-size:1.9rem;line-height:1.2;margin:0 0 6px}
+h2{font-size:1.3rem;margin:44px 0 12px}
+h3{font-size:1.05rem;margin:0 0 6px}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:24px 0 8px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.tile .n{font-size:2rem;font-weight:700;line-height:1.1}
+.tile .l{color:var(--muted);font-size:.9rem}
+.tile.critical{border-top:4px solid var(--critical)}.tile.high{border-top:4px solid var(--high)}
+.tile.medium{border-top:4px solid var(--medium)}.tile.low{border-top:4px solid var(--low)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:12px 0}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+td.num,th.num{text-align:right;white-space:nowrap}
+.pill{display:inline-block;border:1px solid currentColor;border-radius:999px;padding:1px 10px;font-size:.78rem;font-weight:700;white-space:nowrap}
+.pill.critical{color:var(--critical)}.pill.high{color:var(--high)}.pill.medium{color:var(--medium)}.pill.low{color:var(--low)}
+code{font:.88em ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-all}
+ul.urls{margin:10px 0 0;padding-left:20px}ul.urls li{margin:4px 0}
+.meta{color:var(--muted);font-size:.88rem;margin-bottom:8px}
+.bar{height:8px;border-radius:4px;background:var(--line);min-width:120px}
+.bar span{display:block;height:8px;border-radius:4px;background:var(--ok)}
+.bar.over span{background:var(--high)}
+footer{margin-top:48px;color:var(--muted);font-size:.88rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Website governance audit: www.maplewood-demo-cu.test</h1>
+<p class="muted">Generated 2026-11-24 19:36 UTC. Source: XML sitemap.</p>
+<div class="tiles">
+<div class="tile"><div class="n">11</div><div class="l">Pages audited</div></div>
+<div class="tile"><div class="n">1</div><div class="l">Pages with no issues</div></div>
+<div class="tile critical"><div class="n">3</div><div class="l">Critical issues</div></div>
+<div class="tile high"><div class="n">7</div><div class="l">High issues</div></div>
+<div class="tile medium"><div class="n">7</div><div class="l">Medium issues</div></div>
+<div class="tile low"><div class="n">3</div><div class="l">Low issues</div></div>
+</div>
+<h2>What to fix first</h2>
+<p class="muted">Ordered by severity, then by how many pages are affected.</p>
+<div class="card scroll"><table>
+<thead><tr><th class="num">#</th><th>Severity</th><th>Issue</th><th class="num">Pages</th><th>Fix</th></tr></thead><tbody>
+<tr><td class="num">1</td><td><span class="pill critical">Critical</span></td><td><a href="#BROKEN_INTERNAL_LINK">Internal links to pages that return an error</a></td><td class="num">1</td><td>Update the link to a live URL or remove it.</td></tr>
+<tr><td class="num">2</td><td><span class="pill critical">Critical</span></td><td><a href="#HTTP_ERROR">Page returns an error status</a></td><td class="num">1</td><td>Restore the page, redirect it to the closest live equivalent, or remove it from the sitemap and from internal links.</td></tr>
+<tr><td class="num">3</td><td><span class="pill critical">Critical</span></td><td><a href="#NOINDEX_IN_SITEMAP">Sitemap lists a noindex page</a></td><td class="num">1</td><td>Remove the noindex directive if the page should rank. Otherwise remove the URL from the sitemap.</td></tr>
+<tr><td class="num">4</td><td><span class="pill high">High</span></td><td><a href="#TITLE_DUPLICATE">Title tag is shared with another page</a></td><td class="num">2</td><td>Give each page a title that describes that page only.</td></tr>
+<tr><td class="num">5</td><td><span class="pill high">High</span></td><td><a href="#CANONICAL_MISMATCH">Canonical tag points to a different URL</a></td><td class="num">1</td><td>Confirm that is intended. If this page should rank on its own, make the canonical self-referencing.</td></tr>
+<tr><td class="num">6</td><td><span class="pill high">High</span></td><td><a href="#IMG_ALT_MISSING">Images without an alt attribute</a></td><td class="num">1</td><td>Describe each informative image in its alt attribute. Use an empty alt (alt=&quot;&quot;) for decorative images.</td></tr>
+<tr><td class="num">7</td><td><span class="pill high">High</span></td><td><a href="#JSONLD_INVALID">JSON-LD does not parse</a></td><td class="num">1</td><td>Fix the JSON syntax. Trailing commas and unescaped quotes are the usual causes.</td></tr>
+<tr><td class="num">8</td><td><span class="pill high">High</span></td><td><a href="#LANG_MISSING">No lang attribute on the html element</a></td><td class="num">1</td><td>Add the language to the html element in the page template, for example lang=&quot;en&quot;.</td></tr>
+<tr><td class="num">9</td><td><span class="pill high">High</span></td><td><a href="#LINK_TEXT_EMPTY">Links with no text</a></td><td class="num">1</td><td>Add link text, alt text on the linked image, or an aria-label.</td></tr>
+<tr><td class="num">10</td><td><span class="pill medium">Medium</span></td><td><a href="#CANONICAL_MISSING">No canonical tag</a></td><td class="num">1</td><td>Add a self-referencing canonical link element to the page template.</td></tr>
+<tr><td class="num">11</td><td><span class="pill medium">Medium</span></td><td><a href="#H1_MULTIPLE">More than one H1 heading</a></td><td class="num">1</td><td>Keep one H1 and demote the others to H2 or lower.</td></tr>
+<tr><td class="num">12</td><td><span class="pill medium">Medium</span></td><td><a href="#JSONLD_MISSING_PROPERTY">Structured data is missing an expected property</a></td><td class="num">1</td><td>Add the missing property to the JSON-LD block.</td></tr>
+<tr><td class="num">13</td><td><span class="pill medium">Medium</span></td><td><a href="#LINK_TEXT_GENERIC">Links with generic text</a></td><td class="num">1</td><td>Rewrite the link text to name the destination, for example &quot;Auto loan rates&quot;.</td></tr>
+<tr><td class="num">14</td><td><span class="pill medium">Medium</span></td><td><a href="#META_DESC_MISSING">Missing meta description</a></td><td class="num">1</td><td>Write a one or two sentence summary that states what the visitor can do on the page.</td></tr>
+<tr><td class="num">15</td><td><span class="pill medium">Medium</span></td><td><a href="#ORPHAN_PAGE">No internal links point to this page</a></td><td class="num">1</td><td>Link to it from a relevant parent page or the navigation, or retire it.</td></tr>
+<tr><td class="num">16</td><td><span class="pill medium">Medium</span></td><td><a href="#READING_GRADE_HIGH">Reading level is above the target</a></td><td class="num">1</td><td>Shorten sentences, swap jargon for everyday words, and lead with the answer.</td></tr>
+<tr><td class="num">17</td><td><span class="pill low">Low</span></td><td><a href="#HEADING_SKIP">Heading levels are skipped</a></td><td class="num">1</td><td>Use heading levels in order and style them with CSS.</td></tr>
+<tr><td class="num">18</td><td><span class="pill low">Low</span></td><td><a href="#JSONLD_NONE">No structured data</a></td><td class="num">1</td><td>Add JSON-LD that fits the page type, such as Organization, Article, FAQPage, or BreadcrumbList.</td></tr>
+<tr><td class="num">19</td><td><span class="pill low">Low</span></td><td><a href="#THIN_CONTENT">Very little body text</a></td><td class="num">1</td><td>Expand the page, merge it into a stronger page, or mark it noindex if it is only a utility page.</td></tr>
+</tbody></table></div>
+<h2>Findings</h2>
+<section class="card" id="BROKEN_INTERNAL_LINK">
+<h3>Internal links to pages that return an error</h3>
+<div class="meta"><span class="pill critical">Critical</span> Links · <code>BROKEN_INTERNAL_LINK</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Readers hit a dead end and the destination page receives no link value.</p>
+<p><strong>Fix:</strong> Update the link to a live URL or remove it.</p>
+<ul class="urls">
+<li><code>/blog/first-time-home-buyer-guide/</code>: https://www.maplewood-demo-cu.test/blog/2019-rate-update/ (HTTP 404)</li>
+</ul>
+</section>
+<section class="card" id="HTTP_ERROR">
+<h3>Page returns an error status</h3>
+<div class="meta"><span class="pill critical">Critical</span> Indexation · <code>HTTP_ERROR</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Visitors and crawlers hit a dead end. If the URL is in the sitemap, the sitemap is sending search engines to a page that does not exist.</p>
+<p><strong>Fix:</strong> Restore the page, redirect it to the closest live equivalent, or remove it from the sitemap and from internal links.</p>
+<ul class="urls">
+<li><code>/branches/</code>: HTTP 404</li>
+</ul>
+</section>
+<section class="card" id="NOINDEX_IN_SITEMAP">
+<h3>Sitemap lists a noindex page</h3>
+<div class="meta"><span class="pill critical">Critical</span> Indexation · <code>NOINDEX_IN_SITEMAP</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> The sitemap asks search engines to index the page and the page itself says not to. The page stays out of search results.</p>
+<p><strong>Fix:</strong> Remove the noindex directive if the page should rank. Otherwise remove the URL from the sitemap.</p>
+<ul class="urls">
+<li><code>/rates/</code>: meta robots: &quot;noindex, nofollow&quot;</li>
+</ul>
+</section>
+<section class="card" id="TITLE_DUPLICATE">
+<h3>Title tag is shared with another page</h3>
+<div class="meta"><span class="pill high">High</span> Metadata · <code>TITLE_DUPLICATE</code> · 2 page(s)</div>
+<p><strong>Why it matters:</strong> Pages with the same title compete with each other and are hard to tell apart in search results, tabs, and analytics reports.</p>
+<p><strong>Fix:</strong> Give each page a title that describes that page only.</p>
+<ul class="urls">
+<li><code>/checking/</code>: &quot;Free Checking Accounts | Maplewood Demo Credit Union&quot; is also used on https://www.maplewood-demo-cu.test/savings/</li>
+<li><code>/savings/</code>: &quot;Free Checking Accounts | Maplewood Demo Credit Union&quot; is also used on https://www.maplewood-demo-cu.test/checking/</li>
+</ul>
+</section>
+<section class="card" id="CANONICAL_MISMATCH">
+<h3>Canonical tag points to a different URL</h3>
+<div class="meta"><span class="pill high">High</span> Indexation · <code>CANONICAL_MISMATCH</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> The page tells search engines that another URL is the real version, so this URL is unlikely to be indexed.</p>
+<p><strong>Fix:</strong> Confirm that is intended. If this page should rank on its own, make the canonical self-referencing.</p>
+<ul class="urls">
+<li><code>/checking/student/</code>: Canonical is https://www.maplewood-demo-cu.test/checking/</li>
+</ul>
+</section>
+<section class="card" id="IMG_ALT_MISSING">
+<h3>Images without an alt attribute</h3>
+<div class="meta"><span class="pill high">High</span> Accessibility · <code>IMG_ALT_MISSING</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Screen readers fall back to reading the file name. This is WCAG success criterion 1.1.1 (Level A).</p>
+<p><strong>Fix:</strong> Describe each informative image in its alt attribute. Use an empty alt (alt=&quot;&quot;) for decorative images.</p>
+<ul class="urls">
+<li><code>/loans/auto/</code>: 1 of 2 images</li>
+</ul>
+</section>
+<section class="card" id="JSONLD_INVALID">
+<h3>JSON-LD does not parse</h3>
+<div class="meta"><span class="pill high">High</span> Structured data · <code>JSONLD_INVALID</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> A syntax error makes the whole block unreadable, so none of the markup in it counts.</p>
+<p><strong>Fix:</strong> Fix the JSON syntax. Trailing commas and unescaped quotes are the usual causes.</p>
+<ul class="urls">
+<li><code>/about/</code>: line 7, column 25: Illegal trailing comma before end of object</li>
+</ul>
+</section>
+<section class="card" id="LANG_MISSING">
+<h3>No lang attribute on the html element</h3>
+<div class="meta"><span class="pill high">High</span> Accessibility · <code>LANG_MISSING</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Screen readers use the page language to choose pronunciation rules. This is WCAG success criterion 3.1.1 (Level A).</p>
+<p><strong>Fix:</strong> Add the language to the html element in the page template, for example lang=&quot;en&quot;.</p>
+<ul class="urls">
+<li><code>/about/</code></li>
+</ul>
+</section>
+<section class="card" id="LINK_TEXT_EMPTY">
+<h3>Links with no text</h3>
+<div class="meta"><span class="pill high">High</span> Accessibility · <code>LINK_TEXT_EMPTY</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> A link with no text or label is announced only as &quot;link&quot;, so users cannot tell where it goes.</p>
+<p><strong>Fix:</strong> Add link text, alt text on the linked image, or an aria-label.</p>
+<ul class="urls">
+<li><code>/loans/auto/</code>: 1 link(s): https://www.maplewood-demo-cu.test/loans/mortgage/</li>
+</ul>
+</section>
+<section class="card" id="CANONICAL_MISSING">
+<h3>No canonical tag</h3>
+<div class="meta"><span class="pill medium">Medium</span> Indexation · <code>CANONICAL_MISSING</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Without a canonical tag, URL variants (tracking parameters, trailing slashes) can be indexed as duplicates.</p>
+<p><strong>Fix:</strong> Add a self-referencing canonical link element to the page template.</p>
+<ul class="urls">
+<li><code>/blog/first-time-home-buyer-guide/</code></li>
+</ul>
+</section>
+<section class="card" id="H1_MULTIPLE">
+<h3>More than one H1 heading</h3>
+<div class="meta"><span class="pill medium">Medium</span> Metadata · <code>H1_MULTIPLE</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Several H1s blur the page topic and usually mean a template is misusing heading tags for styling.</p>
+<p><strong>Fix:</strong> Keep one H1 and demote the others to H2 or lower.</p>
+<ul class="urls">
+<li><code>/loans/auto/</code>: 2 H1s: Auto loans | Get pre-approved today</li>
+</ul>
+</section>
+<section class="card" id="JSONLD_MISSING_PROPERTY">
+<h3>Structured data is missing an expected property</h3>
+<div class="meta"><span class="pill medium">Medium</span> Structured data · <code>JSONLD_MISSING_PROPERTY</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Incomplete markup gives search engines and AI systems less to work with and can disqualify the page from rich results.</p>
+<p><strong>Fix:</strong> Add the missing property to the JSON-LD block.</p>
+<ul class="urls">
+<li><code>/blog/first-time-home-buyer-guide/</code>: BlogPosting is missing: author, datePublished</li>
+</ul>
+</section>
+<section class="card" id="LINK_TEXT_GENERIC">
+<h3>Links with generic text</h3>
+<div class="meta"><span class="pill medium">Medium</span> Accessibility · <code>LINK_TEXT_GENERIC</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Text such as &quot;click here&quot; does not describe the destination when read out of context. See WCAG success criterion 2.4.4.</p>
+<p><strong>Fix:</strong> Rewrite the link text to name the destination, for example &quot;Auto loan rates&quot;.</p>
+<ul class="urls">
+<li><code>/loans/auto/</code>: Link text used: &quot;click here&quot;</li>
+</ul>
+</section>
+<section class="card" id="META_DESC_MISSING">
+<h3>Missing meta description</h3>
+<div class="meta"><span class="pill medium">Medium</span> Metadata · <code>META_DESC_MISSING</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Search engines will pick their own snippet, which is often a poor summary of the page.</p>
+<p><strong>Fix:</strong> Write a one or two sentence summary that states what the visitor can do on the page.</p>
+<ul class="urls">
+<li><code>/savings/</code></li>
+</ul>
+</section>
+<section class="card" id="ORPHAN_PAGE">
+<h3>No internal links point to this page</h3>
+<div class="meta"><span class="pill medium">Medium</span> Links · <code>ORPHAN_PAGE</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> A page that nothing links to is hard for visitors and crawlers to find, even if it is in the sitemap.</p>
+<p><strong>Fix:</strong> Link to it from a relevant parent page or the navigation, or retire it.</p>
+<ul class="urls">
+<li><code>/disclosures/</code></li>
+</ul>
+</section>
+<section class="card" id="READING_GRADE_HIGH">
+<h3>Reading level is above the target</h3>
+<div class="meta"><span class="pill medium">Medium</span> Content · <code>READING_GRADE_HIGH</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Dense text loses readers. Plain language matters most where the stakes are highest: money, health, and legal topics.</p>
+<p><strong>Fix:</strong> Shorten sentences, swap jargon for everyday words, and lead with the answer.</p>
+<ul class="urls">
+<li><code>/loans/mortgage/</code>: Grade 19.5 against a target of 8 (23.7 words per sentence)</li>
+</ul>
+</section>
+<section class="card" id="HEADING_SKIP">
+<h3>Heading levels are skipped</h3>
+<div class="meta"><span class="pill low">Low</span> Accessibility · <code>HEADING_SKIP</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Jumping from H2 to H4 breaks the outline that screen reader users navigate by.</p>
+<p><strong>Fix:</strong> Use heading levels in order and style them with CSS.</p>
+<ul class="urls">
+<li><code>/loans/mortgage/</code>: H2 is followed by H4 (&quot;Private mortgage insurance considerations&quot;)</li>
+</ul>
+</section>
+<section class="card" id="JSONLD_NONE">
+<h3>No structured data</h3>
+<div class="meta"><span class="pill low">Low</span> Structured data · <code>JSONLD_NONE</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> Structured data states plainly who published the page and what it is about.</p>
+<p><strong>Fix:</strong> Add JSON-LD that fits the page type, such as Organization, Article, FAQPage, or BreadcrumbList.</p>
+<ul class="urls">
+<li><code>/disclosures/</code></li>
+</ul>
+</section>
+<section class="card" id="THIN_CONTENT">
+<h3>Very little body text</h3>
+<div class="meta"><span class="pill low">Low</span> Content · <code>THIN_CONTENT</code> · 1 page(s)</div>
+<p><strong>Why it matters:</strong> A page with almost no text rarely answers a question well enough to rank or to be cited.</p>
+<p><strong>Fix:</strong> Expand the page, merge it into a stronger page, or mark it noindex if it is only a utility page.</p>
+<ul class="urls">
+<li><code>/disclosures/</code>: 10 words</li>
+</ul>
+</section>
+<h2>Reading level by page</h2>
+<p class="muted">Flesch-Kincaid grade level of the main content. Target: grade 8 or lower.</p>
+<div class="card scroll"><table>
+<thead><tr><th>Page</th><th class="num">Grade</th><th></th><th class="num">Words per sentence</th><th class="num">Words</th></tr></thead><tbody>
+<tr><td><code>/loans/mortgage/</code></td><td class="num">19.5 (above target)</td><td><div class="bar over"><span style="width:100%"></span></div></td><td class="num">23.7</td><td class="num">213</td></tr>
+<tr><td><code>/checking/student/</code></td><td class="num">3.4</td><td><div class="bar"><span style="width:17%"></span></div></td><td class="num">8.7</td><td class="num">139</td></tr>
+<tr><td><code>/checking/</code></td><td class="num">3.1</td><td><div class="bar"><span style="width:16%"></span></div></td><td class="num">7.0</td><td class="num">133</td></tr>
+<tr><td><code>/savings/</code></td><td class="num">3.1</td><td><div class="bar"><span style="width:16%"></span></div></td><td class="num">8.3</td><td class="num">124</td></tr>
+<tr><td><code>/about/</code></td><td class="num">2.6</td><td><div class="bar"><span style="width:13%"></span></div></td><td class="num">9.0</td><td class="num">126</td></tr>
+<tr><td><code>/</code></td><td class="num">2.4</td><td><div class="bar"><span style="width:12%"></span></div></td><td class="num">9.3</td><td class="num">167</td></tr>
+<tr><td><code>/blog/first-time-home-buyer-guide/</code></td><td class="num">1.6</td><td><div class="bar"><span style="width:8%"></span></div></td><td class="num">8.7</td><td class="num">173</td></tr>
+<tr><td><code>/loans/auto/</code></td><td class="num">0.9</td><td><div class="bar"><span style="width:5%"></span></div></td><td class="num">8.2</td><td class="num">123</td></tr>
+</tbody></table></div>
+<footer>Full data: <code>pages.csv</code>, <code>issues.csv</code>, <code>audit.sqlite</code>. Generated by website-governance-audit.</footer>
+</main>
+</body>
+</html>
