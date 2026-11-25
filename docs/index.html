@@ -40,9 +40,9 @@ h1{font-size:clamp(2rem,4.6vw,3.25rem);line-height:1.04;letter-spacing:-.03em;fo
 .sheet .body{padding:14px 20px 20px}
 label{display:block;font-weight:600;font-size:.9375rem;margin:0 0 6px}
 .hint{color:var(--muted);font-size:.875rem;margin:6px 0 0}
-textarea,input[type=url],input[type=number]{width:100%;border:1px solid #8a968f;border-radius:2px;background:#fbfcfb;color:var(--ink);padding:10px 12px;font:inherit}
+textarea,input[type=url]{width:100%;border:1px solid #8a968f;border-radius:2px;background:#fbfcfb;color:var(--ink);padding:10px 12px;font:inherit}
 textarea{font:.8125rem/1.5 var(--mono);height:21rem;resize:vertical;white-space:pre;overflow:auto;tab-size:2}
-.row{display:grid;grid-template-columns:minmax(0,1fr) 8rem;gap:16px;margin-top:16px}
+.row{margin-top:16px}
 .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:18px}
 button{font:600 1rem/1 var(--sans);border-radius:2px;padding:13px 20px;cursor:pointer}
 .run{background:var(--accent);color:#fff;border:1px solid var(--accent)}
@@ -86,7 +86,6 @@ footer{border-top:2px solid var(--ink);padding:22px 0 40px;font-size:.9375rem;co
 
 @media (max-width:860px){
   .bench,.two{grid-template-columns:minmax(0,1fr)}
-  .row{grid-template-columns:minmax(0,1fr)}
   textarea{height:15rem}
 }
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
@@ -116,15 +115,9 @@ footer{border-top:2px solid var(--ink);padding:22px 0 40px;font-size:.9375rem;co
           <textarea id="html" spellcheck="false" autocomplete="off" aria-describedby="html-hint"></textarea>
           <p class="hint" id="html-hint">A sample page with problems is loaded. To test your own page, open it, choose View Page Source, and paste everything here.</p>
           <div class="row">
-            <div>
-              <label for="url">Page address (optional)</label>
-              <input type="url" id="url" placeholder="https://www.example.org/page/" aria-describedby="url-hint">
-              <p class="hint" id="url-hint">Used to compare against the canonical tag.</p>
-            </div>
-            <div>
-              <label for="grade">Grade target</label>
-              <input type="number" id="grade" min="1" max="20" step="1" value="8">
-            </div>
+            <label for="url">Page address (optional)</label>
+            <input type="url" id="url" placeholder="https://www.example.org/page/" aria-describedby="url-hint">
+            <p class="hint" id="url-hint">Used to compare against the canonical tag.</p>
           </div>
           <div class="actions">
             <button class="run" type="submit" id="run">Audit this page</button>
@@ -192,6 +185,8 @@ const SOURCE_URL = LOCAL
   : "https://raw.githubusercontent.com/callanspyfer/website-governance-audit/main/src/webaudit/";
 const MODULES = ["__init__.py", "readability.py", "fetch.py", "parse.py", "checks.py", "single.py"];
 const SEVERITIES = ["critical", "high", "medium", "low"];
+// Pages that read above this school grade level are flagged. Grade 8 is a common plain-language target.
+const GRADE_TARGET = 8;
 
 const SAMPLE = `<!doctype html>
 <html>
@@ -313,7 +308,7 @@ function render(result) {
     ["Indexable", f.noindex ? "No, the page is set to noindex" : "Yes"],
     ["H1 headings", String(f.h1_count)],
     ["Words in main content", String(f.word_count)],
-    ["Reading grade", f.reading_grade === null ? "Too short to score" : f.reading_grade + " (" + f.words_per_sentence + " words per sentence)"],
+    ["Reading grade", f.reading_grade === null ? "Too short to score" : f.reading_grade + " (target is " + GRADE_TARGET + " or lower, " + f.words_per_sentence + " words per sentence)"],
     ["Images", f.images + " total, " + f.images_missing_alt + " without an alt attribute"],
     ["Links", f.internal_links + " internal, " + f.external_links + " external"],
     ["Structured data types", f.structured_data_types.length ? f.structured_data_types.join(", ") : "None"],
@@ -342,9 +337,8 @@ async function runAudit(event) {
     const pyodide = await enginePromise;
     setStatus("Auditing.");
     const audit = pyodide.globals.get("audit_html_json");
-    const grade = Number($("grade").value) || 8;
     const started = performance.now();
-    const result = JSON.parse(audit(html, $("url").value.trim() || null, grade));
+    const result = JSON.parse(audit(html, $("url").value.trim() || null, GRADE_TARGET));
     audit.destroy();
     render(result);
     setStatus("Audited in " + Math.max(1, Math.round(performance.now() - started)) + " ms. Nothing was uploaded.");
